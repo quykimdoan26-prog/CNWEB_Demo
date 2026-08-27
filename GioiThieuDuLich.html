@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hành Trình Khám Phá - Trang Web Du Lịch</title>
+    <style>
+        /* --- RESET & BIẾN MÀU TOÀN CỤC --- */
+        :root {
+            --primary: #2b5876;
+            --secondary: #4e4376;
+            --accent: #ff6b6b;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-left: 2rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero {
+            height: 90vh;
+            background:  url('images/hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+
+        /* 1. Tiêu đề chính H1: Trượt lên + hiệu ứng trôi nhẹ */
+.hero h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    
+    /* Chạy hiệu ứng xuất hiện trước, sau đó trôi nhấp nhô */
+    opacity: 0;
+    animation: 
+        heroSlideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards,
+        heroFloat 4s ease-in-out 1.2s infinite alternate;
+}
+
+/* 2. Đoạn mô tả P: Trượt lên trễ hơn H1 (hiệu ứng so le) */
+.hero p {
+    font-size: 1.25rem;
+    max-width: 650px;
+    margin-bottom: 2.2rem;
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    
+    opacity: 0;
+    animation: heroSlideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
+}
+
+/* 3. Nút bấm: Xuất hiện cuối cùng kèm hiệu ứng hào quang phát sáng */
+.hero-btn {
+    background-color: var(--accent);
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    
+    opacity: 0;
+    animation: 
+        heroSlideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards,
+        pulseGlow 2.5s infinite 1.8s;
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+}
+
+/* --- KEYFRAMES ĐIỀU KHIỂN CHUYỂN ĐỘNG --- */
+
+/* Trượt mượt từ dưới lên */
+@keyframes heroSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng trôi/nhấp nhô nhẹ nhàng */
+@keyframes heroFloat {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Hiệu ứng ánh sáng tỏa ra nhẹ ở nút bấm */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px 6px rgba(255, 107, 107, 0);
+    }
+}
+
+        /* --- CONTAINER CHUNG --- */
+        .section {
+            padding: 5rem 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* --- BỘ LỌC ĐỊA ĐIỂM --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- DANH SÁCH ĐỊA ĐIỂM (GRID CARDS) --- */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        /* --- PHẦN BÀI VIẾT KINH NGHIỆM DU LỊCH (TRAVEL LOG) --- */
+        .articles-section {
+            background: #fff;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: row;
+            background: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .article-img {
+            flex: 1;
+            min-height: 250px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .article-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-content {
+            flex: 2;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #1e272e;
+            color: #d2dae2;
+            text-align: center;
+            padding: 3rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-top: 0.5rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .article-card { flex-direction: column; }
+            .article-img { height: 200px; }
+            nav { display: none; } /* Đơn giản hóa giao diện di động */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Du Lịch Việt</div>
+        <nav>
+            <a href="#hero">Trang Chủ</a>
+            <a href="#destinations">Điểm Đến</a>
+            <a href="#articles">Góc Chia Sẻ</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="hero">
+        <h1>Khám Phá Những Vùng Đất Mới</h1>
+        <p>Cùng ngắm nhìn cảnh sắc thiên nhiên tuyệt đẹp và lưu giữ lại những câu chuyện truyền cảm hứng qua từng chặng đường.</p>
+        <a href="#destinations" class="hero-btn">Xem Điểm Đến</a>
+    </section>
+
+    <section class="section" id="destinations">
+        <div class="section-title">
+            <h2>Điểm Đến Nổi Bật</h2>
+            <p>Tổng hợp những danh lam thắng cảnh được yêu thích</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Tất cả</button>
+            <button class="filter-btn" data-filter="bien">Biển Đảo</button>
+            <button class="filter-btn" data-filter="nui">Núi Rừng</button>
+            <button class="filter-btn" data-filter="dothi">Cố Đô / Đô Thị</button>
+        </div>
+
+        <div class="destinations-grid" id="grid-container">
+            <div class="card" data-category="nui">
+                <div class="card-img">
+                    <img src="images/dia-diem-1.jpg" alt="Đà Lạt" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-1.jpg)'">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Núi Rừng</span>
+                    <h3 class="card-title">Đà Lạt Mộng Mơ</h3>
+                    <p class="card-desc">Thành phố ngàn hoa với không khí se lạnh, những đồi thông bạt ngàn và vẻ đẹp lãng mạn thích hợp để nghỉ ngơi, thư giãn.</p>
+                </div>
+            </div>
+
+            <div class="card" data-category="bien">
+                <div class="card-img">
+                    <img src="images/dia-diem-2.jpg" alt="Phú Quốc" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-2.jpg)'">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Biển Đảo</span>
+                    <h3 class="card-title">Đảo Ngọc Phú Quốc</h3>
+                    <p class="card-desc">Bãi biển cát trắng trải dài, nước biển trong xanh màu ngọc bích cùng những ánh hoàng hôn tuyệt mỹ làm say lòng lữ khách.</p>
+                </div>
+            </div>
+
+            <div class="card" data-category="dothi">
+                <div class="card-img">
+                    <img src="images/dia-diem-3.jpg" alt="Hội An" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-3.jpg)'">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Cố Đô / Đô Thị</span>
+                    <h3 class="card-title">Phố Cổ Hội An</h3>
+                    <p class="card-desc">Nơi lưu giữ vẹn nguyên kiến trúc cổ xưa với những mái ngói rêu phong, đèn lồng rực rỡ và nhịp sống bình dị bên dòng sông Hoài.</p>
+                </div>
+            </div>
+
+            <div class="card" data-category="bien">
+                <div class="card-img">
+                    <img src="images/hero-bg.jpg" alt="Vịnh Hạ Long" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-4.jpg)'">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Biển Đảo</span>
+                    <h3 class="card-title">Vịnh Hạ Long</h3>
+                    <p class="card-desc">Kỳ quan thiên nhiên thế giới với hàng ngàn đảo đá vôi kỳ vĩ nhô lên trên mặt biển xanh biếc tuyệt mỹ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section articles-section" id="articles">
+        <div class="section-title">
+            <h2>Góc Nhìn & Cảm Nhận</h2>
+            <p>Những mẩu chuyện nhỏ và kinh nghiệm trên cung đường khám phá</p>
+        </div>
+
+        <div class="article-card">
+            <div class="article-img">
+                <img src="images/Canh-dep-thien-nhien-Viet-Nam-88.jpg" alt="Kinh nghiệm du lịch" onerror="this.parentElement.innerText='Chưa có ảnh (images/bai-viet-1.jpg)'">
+            </div>
+            <div class="article-content">
+                <h3>1. Nghệ Thuật Đi Chậm Để Thưởng Thức Thiên Nhiên</h3>
+                <p>Du lịch không đơn thuần chỉ là việc check-in càng nhiều điểm càng tốt. Đôi khi, việc ngồi lại một quán trà ven đường, lắng nghe tiếng gió thổi qua tán cây và trò chuyện cùng người dân địa phương mới là điều để lại ấn tượng sâu sắc nhất.</p>
+            </div>
+        </div>
+
+        <div class="article-card">
+            <div class="article-img">
+                <img src="images/1742543786-1877566014-tour-trekking-leo-nui-vqg-bidoup-ndash-ta-giang-3-ngay.jpg" alt="Kinh nghiệm chụp ảnh" onerror="this.parentElement.innerText='Chưa có ảnh (images/bai-viet-2.jpg)'">
+            </div>
+            <div class="article-content">
+                <h3>2. Hành Lý Tối Giản Cho Chuyến Đi Tự Do</h3>
+                <p>Một chiếc balo nhẹ nhàng, trang phục thoáng mát và tinh thần thoải mái sẽ giúp bạn tận hưởng trọn vẹn vẻ đẹp của cảnh vật mà không bị phân tâm bởi những đồ đạc cồng kềnh.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Cẩm Nang Du Lịch. Trang web chia sẻ thông tin & trải nghiệm cảnh đẹp.</p>
+        <p>Thiết kế dành cho mục đích đọc và xem ảnh cá nhân.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const destinationCards = document.querySelectorAll('#grid-container .card');
+
+            // Xử lý sự kiện lọc theo danh mục
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Cập nhật trạng thái active cho nút bấm
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Ẩn / Hiện các card theo category
+                    destinationCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (filterValue === 'all' || cardCategory === filterValue) {
+                            card.style.display = 'flex';
+                            card.style.animation = 'fadeIn 0.5s ease forwards';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
