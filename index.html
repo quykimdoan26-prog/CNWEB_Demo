@@ -391,7 +391,16 @@
                     <p class="card-desc">Thành phố ngàn hoa với không khí se lạnh, những đồi thông bạt ngàn và vẻ đẹp lãng mạn thích hợp để nghỉ ngơi, thư giãn.</p>
                 </div>
             </div>
-
+             <div class="card" data-category="nui">
+                <div class="card-img">
+                    <img src="images/du-lich-sapa.jpg" alt="Sapa" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-1.jpg)'">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Núi Rừng</span>
+                    <h3 class="card-title">Sapa Việt Nam</h3>
+                    <p class="card-desc">Sa Pa nằm ở phía tây tỉnh Lào Cai, Tây Bắc Việt Nam, cách Hà Nội khoảng 250 km (160 dặm) về phía tây bắc và cách biên giới với Trung Quốc 20 km (12 dặm). Phía tây giáp các huyện Tam Đường và Tân Uyên thuộc tỉnh Lai Châu, phía đông giáp thành phố Lào Cai và huyện Bảo Thắng, phía nam giáp huyện Văn Bàn, và phía bắc giáp huyện Bát Xát.</p>
+                </div>
+            </div>
             <div class="card" data-category="bien">
                 <div class="card-img">
                     <img src="images/dia-diem-2.jpg" alt="Phú Quốc" onerror="this.parentElement.innerText='Chưa có ảnh (images/dia-diem-2.jpg)'">
@@ -457,7 +466,7 @@
     <footer>
         <p>&copy; 2026 Cẩm Nang Du Lịch. Trang web chia sẻ thông tin & trải nghiệm cảnh đẹp.</p>
         <p>Thiết kế dành cho mục đích đọc và xem ảnh cá nhân.</p>
-        <p>&copy;Nhà phát triển Kim Quý IT</p>
+        <p>&copy; Nhà phát triển Kim Quý IT</p>
     </footer>
 
     <script>
@@ -473,7 +482,6 @@
                     button.classList.add('active');
 
                     const filterValue = button.getAttribute('data-filter');
-
                     // Ẩn / Hiện các card theo category
                     destinationCards.forEach(card => {
                         const cardCategory = card.getAttribute('data-category');
